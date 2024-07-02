@@ -53,11 +53,13 @@ if __name__ == '__main__':
     encrypted_file = f"{splt_file_name[0]}_encrypted.txt"
     decrypted_file = f"{splt_file_name[0]}_decrypted.txt"
 
-
-    # Generating and storing key
-    key = generate_key()
-    key_file = 'key.key'
-    save_generate_key(key, key_file)
+    if not os.path.isfile('./key.key'):
+        # Generating and storing key
+        key = generate_key()
+        key_file = 'key.key'
+        save_generate_key(key, key_file)
+    else:
+        key = load_key_file('key.key')
 
     # Encrypting file
     encrypt_file(file_to_encrypt, encrypted_file, key)
